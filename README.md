@@ -1,1 +1,1 @@
-# hyunboard
+# fastcampus-project-board
