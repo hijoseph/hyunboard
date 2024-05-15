@@ -1,19 +1,14 @@
 debug: false
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+management.endpoints.web.exposure.include: "*"
 
-logging:
-  level:
-    com.fastcampus.projectboard: debug
-    org:
-      springframework.web.servlet: debug
-      hibernate:
-        sql: debug
-        type.descriptor.sql.BasicBinder: trace
-        orm.jdbc.bind: trace
+logging.level:
+  com.fastcampus.projectboard: debug
+  org:
+    springframework.web.servlet: debug
+    hibernate:
+      sql: debug
+      type.descriptor.sql.BasicBinder: trace
+      orm.jdbc.bind: trace
 
 spring:
   datasource:
@@ -23,18 +18,15 @@ spring:
     dirver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     defer-datasource-initialization: true
-    hibernate:
-      ddl-auto: create
     show-sql: true
-    properties:
-      hibernate:
+    hibernate.ddl-auto: create
+    properties.hibernate:
         format_sql: true
         default_batch_fetch_size: 100
   sql.init.mode: always
-  data:
-    rest:
-      base-path: /api
-      detection-strategy: annotated
+  data.rest:
+    base-path: /api
+    detection-strategy: annotated
 
 
 ---
