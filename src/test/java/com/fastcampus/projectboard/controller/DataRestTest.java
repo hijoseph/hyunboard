@@ -43,4 +43,16 @@ public class DataRestTest {
                 .andExpect(content().contentType(MediaType.valueOf("application/hal+json")))
                 .andDo(print()) ;
     }
+
+    @DisplayName("[api] 댓글 단건 조회")
+    @Test
+    void givenNothing_whenRequestingArticleComment_thenReturnsArticlesJsonResponse() throws Exception {
+        // Given
+
+        // When & Then
+        mvc.perform(get("/api/articleComments/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.valueOf("application/hal+json")))
+                .andDo(print()) ;
+    }
 }
