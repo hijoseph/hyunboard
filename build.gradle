@@ -1,5 +1,5 @@
 plugins {
-	java
+	id ("java")
 	id("org.springframework.boot") version "3.2.5"
 	id("io.spring.dependency-management") version "1.1.4"
 }
@@ -13,13 +13,20 @@ java {
 
 configurations {
 	compileOnly {
-		extendsFrom(configurations.annotationProcessor.get())
+		extendsFrom annotationProcessor
 	}
 }
+/*configurations {
+	compileOnly {
+		extendsFrom(configurations.annotationProcessor.get())
+	}
+}*/
 
 repositories {
 	mavenCentral()
 }
+
+print(dependencyManagement)
 
 dependencies {
 //    implementation ("org.springdoc:springdoc-openapi-ui:1.6.12")
@@ -60,6 +67,28 @@ dependencies {
 
 }
 
-tasks.withType<Test> {
+/*tasks.withType<Test> {
+	useJUnitPlatform()
+}*/
+tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// Querydsl 설정부
+def generated = 'src/main/generated'
+
+// querydsl QClass 파일 생성 위치를 지정
+tasks.withType(JavaCompile) {
+	options.getGeneratedSourceOutputDirectory().set(file(generated))
+}
+
+// java source set 에 querydsl QClass 위치 추가
+sourceSets {
+	main.java.srcDirs += [ generated ]
+}
+
+// gradle clean 시에 QClass 디렉토리 삭제
+clean {
+	delete file(generated)
+}
+
